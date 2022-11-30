@@ -54,6 +54,11 @@
       <artifactId>gson</artifactId>
       <version>2.10</version>
     </dependency>
+    <dependency>
+      <groupId>com.opencsv</groupId>
+      <artifactId>opencsv</artifactId>
+      <version>5.0</version>
+    </dependency>
   </dependencies>
   <build>
     <finalName>java-web-project</finalName>
