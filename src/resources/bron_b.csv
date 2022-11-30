@@ -1,106 +1,106 @@
-1;Pa³ka;Jednorêczna;5;5;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-2;Pogrzebacz;Jednorêczna;5;6;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego.
-3;Sierp;Jednorêczna;5;7;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego.
-4;Kilof;Dwurêczna;5;7;W pobli¿u opuszczonej kopalni.
-5;Pa³ka;Jednorêczna;5;8;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego i Darriona
-6;Siekiera;Jednorêczna;5;9;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-7;M³ot Kowalski;Jednorêczna;5;10;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-8;Zardzewia³y Miecz;Jednorêczna;5;10;W pierwszym rozdziale mo¿na kupiæ u Fiska. Posiadaj¹ go gobliny i szkielety.
-9;Kij z GwoŸdziem;Jednorêczna;5;11;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego i Darriona. Posiadaj¹ go czarne gobliny.
-10;Krótki Miecz;Jednorêczna;6;12;W pierwszym rozdziale mo¿na kupiæ u Fiska.
-11;Stary miecz;Jednorêczna;10;12;Na drodze z placu wymiany, przy m³odym œcierwojadzie.
-12;Wyszczerbiony Topór;Jednorêczna;7;13;W pierwszym rozdziale mo¿na kupiæ u Sharky'ego, a w drugim u Darriona. Posiada go szkielet wojownik.
-13;Ch³opski Miecz;Jednorêczna;7;14;W pierwszym rozdziale mo¿na kupiæ u Fiska. Posiadaj¹ go Cienie.
-14;Siekacz;Jednorêczna;8;15;W drugim rozdziale mo¿na kupiæ u Sharky'ego. Posiadaj¹ go niektóre rodzaje szkieletów.
-15;Jêzyk Topielca;Jednorêczna;8;16;W pierwszym rozdziale mo¿na kupiæ u Fiska. Posiadaj¹ go niektóre Cienie.
-16;Kostur;Dwurêczna;9;17;Istnieje w plikach Gothic'a, ale nie wystêpuje w grze.
-17;K³uj¹cy Cierñ;Jednorêczna;9;18;W pierwszym rozdziale mo¿na kupiæ u Fiska. Posiadaj¹ go niektóre Cienie.
-18;Laska Sêdziowska;Dwurêczna;100;19;Posiadaj¹ go Nowicjusze w Œwi¹tyni Œni¹cego.
-19;Niewykoñczony Miecz;Jednorêczna;20;20;W drugim rozdziale mo¿na kupiæ u Skipa. Mo¿na samemu wykuæ, w pierwszym rozdziale kupuj¹c surow¹ stal u Huna i Darriona.
-20;Z¹b kopacza;Jednorêczna;10;20;W pierwszym rozdziale mo¿na kupiæ u Fiska.
-21;Pa³ka Fortuna;Jednorêczna;15;20;Broñ Fortuna.
-22;Miecz Œwistaka;Jednorêczna;15;20;Przedmiot z zadania, trzeba kupiæ za 110 bry³ek rudy od Fiska dla Œwistaka.
-23;Laska Kap³añska;Dwurêczna;10;21;Nie jest u¿ywany w grze.
-24;Lekki Miecz Stra¿nika;Jednorêczna;20;22;Otrzymuje siê od Gorna, gdy zapyta siê go o napad na transport zaopatrzenia. Odbêdzie siê on, jeœli przyniesiemy Laresowi listê od Iana i sfa³szowan¹ zaniesiemy dla Diego.
-25;Maczuga;Jednorêczna;10;23;W drugim rozdziale mo¿na kupiæ u Sharky'ego i Darriona. Posiada go goblin wojownik.
-26;Æwiekowa Maczuga;Jednorêczna;11;25;W drugim rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-27;Ber³o;Dwurêczna;20;26;Posiada je Ry¿owy ksi¹¿ê.
-28;¯¹d³o Krwiopijcy;Jednorêczna;11;26;W drugim rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-29;Topór;Jednorêczna;12;29;W drugim rozdziale mo¿na kupiæ u Sharky'ego.
-30;Stalowy Jêzyk;Jednorêczna;11;29;W drugim rozdziale mo¿na kupiæ u Sharky'ego i Darriona. Na cmentarzysku orków.
-31;Miecz Sêdziego;Jednorêczna;12;30;W drugim rozdziale mo¿na kupiæ u Skipa i Fiska.
-32;Miecz Stra¿nika;Jednorêczna;12;32;W drugim rozdziale mo¿na kupiæ u Skipa i Fiska, a w czwartym u Skorpiona. Posiadaj¹ go stra¿nicy.
-33;Miecz Bojowy;Jednorêczna;13;33;W drugim rozdziale mo¿na kupiæ u Skipa i Fiska. Na cmentarzysku orków.
-34;Miecz Wojenny;Jednorêczna;14;34;Na cmentarzysku orków posiadaj¹ go Stra¿nicy Œwi¹tynni.
-35;Morgensztern;Jednorêczna;20;30;W drugim rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-36;¯elazna Maczuga;Jednorêczna;15;36;W drugim rozdziale mo¿na kupiæ u Sharky'ego, a w trzecim u Darriona.
-37;Ulu-Mulu;Dwurêczna;30;35;Przedmiot zadania, ork niewolnik Tarrok w wolnej kopalni mo¿e je stworzyæ (potrzebuje do tego odpowiednich sk³adników), gdy przyniesie siê mu lekarstwo.
-38;£omotacz;Jednorêczna;26;37;Znajduje siê w jednej z pieczar w Starej Kopalni, na najni¿szym poziomie z ogromnym miechem. W drugim rozdziale mo¿na kupiæ u Darriona, a w trzecim u Sharky'ego. Posiadaj¹ go niektórzy najemnicy.
-39;£amacz serc;Jednorêczna;17;39;Posiada go Baal Lukor.
-40;D³ugi Miecz;Jednorêczna;17;40;W trzecim rozdziale mo¿na kupiæ u Fiska i Skipa.
-41;Miecz Strachu;Jednorêczna;18;42;W trzecim rozdziale mo¿na kupiæ u Fiska i Skipa. Posiada go Bullit.
-42;Miecz Nienawiœci;Jednorêczna;18;44;W trzecim rozdziale mo¿na kupiæ u Fiska i Skipa.
-43;Zardzewia³y Miecz Pó³torarêczny;Jednorêczna;31;45;W czwartym rozdziale mo¿na kupiæ u Skorpiona.
-44;Krush Varrok;Dwurêczna;25;45;Posiada go ork i ork myœliwy.
-45;Miecz Zwyciêstwa;Jednorêczna;20;46;W trzecim rozdziale mo¿na kupiæ u Fiska i Skipa. W górskiej twierdzy.
-46;Miecz Œmierci;Jednorêczna;21;48;Na cmentarzysku orków.
-47;M³ot Orków;Jednorêczna;22;50;W trzecim rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-48;Krush Pach;Dwurêczna;30;50;Posiada go ork wojownik.
-49;M³ot Wojenny;Jednorêczna;23;51;W trzecim rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-50;Boski M³ot;Jednorêczna;23;52;W trzecim rozdziale mo¿na kupiæ u Sharky'ego i Darriona.
-51;Gruchotacz;Jednorêczna;24;53;W trzecim rozdziale mo¿na kupiæ u Sharky'ego.
-52;£amacz koœci;Jednorêczna;25;54;Topór Jackala.
-53;Miecz Szeroki;Jednorêczna;26;55;W trzecim rozdziale mo¿na kupiæ u Fiska, a w czwartym u Skorpiona.
-54;Pa³ka Namiba;Jednorêczna;40;55;Posiada j¹ Baal Namib.
-55;Topór Silasa;Jednorêczna;40;55;Posiada go Silas.
-56;Cios £ap¹;Jednorêczna;40;55;Posiada j¹ Bartholo.
-57;Krush Urrok;Dwurêczna;35;55;Posiada j¹ ork wojownik.
-58;Wyrok Wojownika;Jednorêczna;27;57;W czwartym rozdziale mo¿na kupiæ u Skorpiona. 
-59;Szept Burzy;Jednorêczna;28;58;W czwartym rozdziale mo¿na kupiæ u Skorpiona. 
-60;Rêka Stra¿nika;Jednorêczna;29;59;W czwartym rozdziale mo¿na kupiæ u Skorpiona. 
-61;Siekacz Corda;Jednorêczna;35;60;Posiada go Cord.
-62;Negocjator Lestera;Jednorêczna;40;60;Posiada go Lester.
-63;Pa³ka Oruna;Jednorêczna;50;60;Posiada j¹ Baal Orun.
-64;Krush Agash;Dwurêczna;40;60;Posiada go ork wojownik.
-65;Zardzewia³y Miecz Oburêczny;Dwurêczna;30;61;W czwartym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-66;RzeŸnik;Jednorêczna;32;64;W czwartym rozdziale mo¿na kupiæ u Skorpiona.
-67;Kat;Jednorêczna;33;65;W czwartym rozdziale mo¿na kupiæ u Skorpiona.
-68;Topór Laresa;Jednorêczna;45;65;Posiada go Lares.
-69;Miecz Arto;Jednorêczna;50;65;Posiada go Arto.
-70;Kostur Œwiat³a;Dwurêczna;45;65;Posiada j¹ Y'Berion.
-71;Krush Brokdar;Dwurêczna;45;65;Posiada go ork w Œwi¹tyni.
-72;Wrzask Berserkera;Jednorêczna;35;66;W czwartym rozdziale mo¿na kupiæ u Skorpiona.
-73;Stary Topór Bojowy;Dwurêczna;36;67;W czwartym rozdziale mo¿na kupiæ u Sharky'ego.
-74;Krwawy ¯niwiarz;Dwurêczna;38;68;W pi¹tym rozdziale mo¿na kupiæ u Sharky'ego.
-75;Stary Sêdzia;Dwurêczna;40;69;W wolnej kopalni miêdzy jaskini¹ a piecem hutniczym.
-76;Miecz Kaloma;Jednorêczna;55;70;Posiada go Cor Kalom.
-77;Prawo Kruka;Jednorêczna;55;70;Posiada je Kruk.
-78;Lekki Miecz Dwurêczny;Dwurêczna;45;70;W czwartym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-79;Miecz Nadzorcy;Dwurêczna;44;71;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-80;Ostrze Najemnika;Dwurêczna;46;73;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-81;Miecz Królewski;Dwurêczna;48;74;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-82;Krush Karrok;Dwurêczna;50;75;Posiadaj¹ j¹ Stra¿nicy Œwi¹tyni Œni¹cego.
-83;Miecz Demonów;Dwurêczna;50;76;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-84;Lekki Topór Bojowy;Dwurêczna;52;77;W czwartym rozdziale mo¿na kupiæ u Sharky'ego.
-85;Grzmot;Dwurêczna;54;79;W czwartym rozdziale mo¿na kupiæ u Sharky'ego.
-86;Chrzêst;Dwurêczna;56;80;W pi¹tym rozdziale mo¿na kupiæ u Sharky'ego. W Œwi¹tyni Œni¹cego w bocznym pomieszczeniu pierwszej sali za kratami.
-87;Dwurêczniak;Dwurêczna;58;81;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-88;Ostrze Bohatera;Dwurêczna;60;83;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-89;Miecz Blizny;Jednorêczna;70;85;Posiada go Blizna.
-90;Krwawe Ostrze;Dwurêczna;62;85;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona. Stare komnaty Gomeza w wewnêtrznym pierœcieniu. Przy pe³zaczach w Œwi¹tyni Œni¹cego.
-91;Ciê¿ki Dwurêczniak;Dwurêczna;64;86;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona.
-92;Gniewna Stal;Dwurêczna;66;88;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona. Przy pe³zaczach w Œwi¹tyni Œni¹cego.
-93;Wœciek³a Stal;Dwurêczna;68;90;W pi¹tym rozdziale mo¿na kupiæ u Darriona i Skorpiona. Przy pe³zaczach w Œwi¹tyni Œni¹cego.
-94;Miecz Thorusa;Dwurêczna;75;90;Posiada go Thorus.
-95;Mœciwa Stal;Dwurêczna;70;92;W pi¹tym rozdziale mo¿na kupiæ u Darriona, jest tak¿e przy Skorpionie.W Œwi¹tyni Œni¹cego.
-96;Topór Wojenny;Dwurêczna;72;94;W pi¹tym rozdziale mo¿na kupiæ u Sharky'ego.
-97;Topór Orika;Dwurêczna;90;95;Posiada go Orik.
-98;Krzyk Wojownika;Dwurêczna;74;96;W pi¹tym rozdziale mo¿na kupiæ u Sharky'ego.
-99;Piêœæ Barbarzyñcy;Dwurêczna;76;98;W pi¹tym rozdziale mo¿na kupiæ u Sharky'ego. W Œwi¹tyni Œni¹cego niedaleko ukrytego wyjœcia z tunelu przy moœcie nad law¹.
-100;Topór Torlofa;Dwurêczna;85;99;Posiada go Torlof.
-101;Piêœæ Trolla;Dwurêczna;78;100;W pi¹tym rozdziale mo¿na kupiæ u Sharky'ego. W Œwi¹tyni Œni¹cego przy szamanie Grash-Varrag-Arushat. W pi¹tym rozdziale skrzynia Gomeza.
-102;Zemsta Gorna;Dwurêczna;80;100;Posiada j¹ Gorn.
-103;Czerwony Wiatr;Dwurêczna;80;105;Posiada go Cor Angar.
-104;Topór Lee;Dwurêczna;95;105;Posiada go Lee.
-105;Gniew Innosa;Dwurêczna;90;110;Posiada go Gomez.
-106;Uriziel;Dwurêczna;30;150;Przedmiot z zadania. Broñ trzeba zidentyfikowaæ u Xardasa, na³adowaæ za pomoc¹ kopca rudy w Nowym Obozie i pokonaæ ostatniego szamana w Œwi¹tyni Œni¹cego.
+1;PaXka;JednorXczna;5;5;W pierwszym rozdziale moXna kupiX u Sharky'ego i Darriona.
+2;Pogrzebacz;JednorXczna;5;6;W pierwszym rozdziale moXna kupiX u Sharky'ego.
+3;Sierp;JednorXczna;5;7;W pierwszym rozdziale moXna kupiX u Sharky'ego.
+4;Kilof;DwurXczna;5;7;W pobliXu opuszczonej kopalni.
+5;PaXka;JednorXczna;5;8;W pierwszym rozdziale moXna kupiX u Sharky'ego i Darriona
+6;Siekiera;JednorXczna;5;9;W pierwszym rozdziale moXna kupiX u Sharky'ego i Darriona.
+7;MXot Kowalski;JednorXczna;5;10;W pierwszym rozdziale moXna kupiX u Sharky'ego i Darriona.
+8;ZardzewiaXy Miecz;JednorXczna;5;10;W pierwszym rozdziale moXna kupiX u Fiska. PosiadajX go gobliny i szkielety.
+9;Kij z GwoXdziem;JednorXczna;5;11;W pierwszym rozdziale moXna kupiX u Sharky'ego i Darriona. PosiadajX go czarne gobliny.
+10;KrXtki Miecz;JednorXczna;6;12;W pierwszym rozdziale moXna kupiX u Fiska.
+11;Stary miecz;JednorXczna;10;12;Na drodze z placu wymiany, przy mXodym Xcierwojadzie.
+12;Wyszczerbiony TopXr;JednorXczna;7;13;W pierwszym rozdziale moXna kupiX u Sharky'ego, a w drugim u Darriona. Posiada go szkielet wojownik.
+13;ChXopski Miecz;JednorXczna;7;14;W pierwszym rozdziale moXna kupiX u Fiska. PosiadajX go Cienie.
+14;Siekacz;JednorXczna;8;15;W drugim rozdziale moXna kupiX u Sharky'ego. PosiadajX go niektXre rodzaje szkieletXw.
+15;JXzyk Topielca;JednorXczna;8;16;W pierwszym rozdziale moXna kupiX u Fiska. PosiadajX go niektXre Cienie.
+16;Kostur;DwurXczna;9;17;Istnieje w plikach Gothic'a, ale nie wystXpuje w grze.
+17;KXujXcy CierX;JednorXczna;9;18;W pierwszym rozdziale moXna kupiX u Fiska. PosiadajX go niektXre Cienie.
+18;Laska SXdziowska;DwurXczna;100;19;PosiadajX go Nowicjusze w XwiXtyni XniXcego.
+19;NiewykoXczony Miecz;JednorXczna;20;20;W drugim rozdziale moXna kupiX u Skipa. MoXna samemu wykuX, w pierwszym rozdziale kupujXc surowX stal u Huna i Darriona.
+20;ZXb kopacza;JednorXczna;10;20;W pierwszym rozdziale moXna kupiX u Fiska.
+21;PaXka Fortuna;JednorXczna;15;20;BroX Fortuna.
+22;Miecz Xwistaka;JednorXczna;15;20;Przedmiot z zadania, trzeba kupiX za 110 bryXek rudy od Fiska dla Xwistaka.
+23;Laska KapXaXska;DwurXczna;10;21;Nie jest uXywany w grze.
+24;Lekki Miecz StraXnika;JednorXczna;20;22;Otrzymuje siX od Gorna, gdy zapyta siX go o napad na transport zaopatrzenia. OdbXdzie siX on, jeXli przyniesiemy Laresowi listX od Iana i sfaXszowanX zaniesiemy dla Diego.
+25;Maczuga;JednorXczna;10;23;W drugim rozdziale moXna kupiX u Sharky'ego i Darriona. Posiada go goblin wojownik.
+26;Xwiekowa Maczuga;JednorXczna;11;25;W drugim rozdziale moXna kupiX u Sharky'ego i Darriona.
+27;BerXo;DwurXczna;20;26;Posiada je RyXowy ksiXXX.
+28;XXdXo Krwiopijcy;JednorXczna;11;26;W drugim rozdziale moXna kupiX u Sharky'ego i Darriona.
+29;TopXr;JednorXczna;12;29;W drugim rozdziale moXna kupiX u Sharky'ego.
+30;Stalowy JXzyk;JednorXczna;11;29;W drugim rozdziale moXna kupiX u Sharky'ego i Darriona. Na cmentarzysku orkXw.
+31;Miecz SXdziego;JednorXczna;12;30;W drugim rozdziale moXna kupiX u Skipa i Fiska.
+32;Miecz StraXnika;JednorXczna;12;32;W drugim rozdziale moXna kupiX u Skipa i Fiska, a w czwartym u Skorpiona. PosiadajX go straXnicy.
+33;Miecz Bojowy;JednorXczna;13;33;W drugim rozdziale moXna kupiX u Skipa i Fiska. Na cmentarzysku orkXw.
+34;Miecz Wojenny;JednorXczna;14;34;Na cmentarzysku orkXw posiadajX go StraXnicy XwiXtynni.
+35;Morgensztern;JednorXczna;20;30;W drugim rozdziale moXna kupiX u Sharky'ego i Darriona.
+36;Xelazna Maczuga;JednorXczna;15;36;W drugim rozdziale moXna kupiX u Sharky'ego, a w trzecim u Darriona.
+37;Ulu-Mulu;DwurXczna;30;35;Przedmiot zadania, ork niewolnik Tarrok w wolnej kopalni moXe je stworzyX (potrzebuje do tego odpowiednich skXadnikXw), gdy przyniesie siX mu lekarstwo.
+38;Xomotacz;JednorXczna;26;37;Znajduje siX w jednej z pieczar w Starej Kopalni, na najniXszym poziomie z ogromnym miechem. W drugim rozdziale moXna kupiX u Darriona, a w trzecim u Sharky'ego. PosiadajX go niektXrzy najemnicy.
+39;Xamacz serc;JednorXczna;17;39;Posiada go Baal Lukor.
+40;DXugi Miecz;JednorXczna;17;40;W trzecim rozdziale moXna kupiX u Fiska i Skipa.
+41;Miecz Strachu;JednorXczna;18;42;W trzecim rozdziale moXna kupiX u Fiska i Skipa. Posiada go Bullit.
+42;Miecz NienawiXci;JednorXczna;18;44;W trzecim rozdziale moXna kupiX u Fiska i Skipa.
+43;ZardzewiaXy Miecz PXtorarXczny;JednorXczna;31;45;W czwartym rozdziale moXna kupiX u Skorpiona.
+44;Krush Varrok;DwurXczna;25;45;Posiada go ork i ork myXliwy.
+45;Miecz ZwyciXstwa;JednorXczna;20;46;W trzecim rozdziale moXna kupiX u Fiska i Skipa. W gXrskiej twierdzy.
+46;Miecz Xmierci;JednorXczna;21;48;Na cmentarzysku orkXw.
+47;MXot OrkXw;JednorXczna;22;50;W trzecim rozdziale moXna kupiX u Sharky'ego i Darriona.
+48;Krush Pach;DwurXczna;30;50;Posiada go ork wojownik.
+49;MXot Wojenny;JednorXczna;23;51;W trzecim rozdziale moXna kupiX u Sharky'ego i Darriona.
+50;Boski MXot;JednorXczna;23;52;W trzecim rozdziale moXna kupiX u Sharky'ego i Darriona.
+51;Gruchotacz;JednorXczna;24;53;W trzecim rozdziale moXna kupiX u Sharky'ego.
+52;Xamacz koXci;JednorXczna;25;54;TopXr Jackala.
+53;Miecz Szeroki;JednorXczna;26;55;W trzecim rozdziale moXna kupiX u Fiska, a w czwartym u Skorpiona.
+54;PaXka Namiba;JednorXczna;40;55;Posiada jX Baal Namib.
+55;TopXr Silasa;JednorXczna;40;55;Posiada go Silas.
+56;Cios XapX;JednorXczna;40;55;Posiada jX Bartholo.
+57;Krush Urrok;DwurXczna;35;55;Posiada jX ork wojownik.
+58;Wyrok Wojownika;JednorXczna;27;57;W czwartym rozdziale moXna kupiX u Skorpiona. 
+59;Szept Burzy;JednorXczna;28;58;W czwartym rozdziale moXna kupiX u Skorpiona. 
+60;RXka StraXnika;JednorXczna;29;59;W czwartym rozdziale moXna kupiX u Skorpiona. 
+61;Siekacz Corda;JednorXczna;35;60;Posiada go Cord.
+62;Negocjator Lestera;JednorXczna;40;60;Posiada go Lester.
+63;PaXka Oruna;JednorXczna;50;60;Posiada jX Baal Orun.
+64;Krush Agash;DwurXczna;40;60;Posiada go ork wojownik.
+65;ZardzewiaXy Miecz OburXczny;DwurXczna;30;61;W czwartym rozdziale moXna kupiX u Darriona i Skorpiona.
+66;RzeXnik;JednorXczna;32;64;W czwartym rozdziale moXna kupiX u Skorpiona.
+67;Kat;JednorXczna;33;65;W czwartym rozdziale moXna kupiX u Skorpiona.
+68;TopXr Laresa;JednorXczna;45;65;Posiada go Lares.
+69;Miecz Arto;JednorXczna;50;65;Posiada go Arto.
+70;Kostur XwiatXa;DwurXczna;45;65;Posiada jX Y'Berion.
+71;Krush Brokdar;DwurXczna;45;65;Posiada go ork w XwiXtyni.
+72;Wrzask Berserkera;JednorXczna;35;66;W czwartym rozdziale moXna kupiX u Skorpiona.
+73;Stary TopXr Bojowy;DwurXczna;36;67;W czwartym rozdziale moXna kupiX u Sharky'ego.
+74;Krwawy Xniwiarz;DwurXczna;38;68;W piXtym rozdziale moXna kupiX u Sharky'ego.
+75;Stary SXdzia;DwurXczna;40;69;W wolnej kopalni miXdzy jaskiniX a piecem hutniczym.
+76;Miecz Kaloma;JednorXczna;55;70;Posiada go Cor Kalom.
+77;Prawo Kruka;JednorXczna;55;70;Posiada je Kruk.
+78;Lekki Miecz DwurXczny;DwurXczna;45;70;W czwartym rozdziale moXna kupiX u Darriona i Skorpiona.
+79;Miecz Nadzorcy;DwurXczna;44;71;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+80;Ostrze Najemnika;DwurXczna;46;73;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+81;Miecz KrXlewski;DwurXczna;48;74;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+82;Krush Karrok;DwurXczna;50;75;PosiadajX jX StraXnicy XwiXtyni XniXcego.
+83;Miecz DemonXw;DwurXczna;50;76;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+84;Lekki TopXr Bojowy;DwurXczna;52;77;W czwartym rozdziale moXna kupiX u Sharky'ego.
+85;Grzmot;DwurXczna;54;79;W czwartym rozdziale moXna kupiX u Sharky'ego.
+86;ChrzXst;DwurXczna;56;80;W piXtym rozdziale moXna kupiX u Sharky'ego. W XwiXtyni XniXcego w bocznym pomieszczeniu pierwszej sali za kratami.
+87;DwurXczniak;DwurXczna;58;81;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+88;Ostrze Bohatera;DwurXczna;60;83;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+89;Miecz Blizny;JednorXczna;70;85;Posiada go Blizna.
+90;Krwawe Ostrze;DwurXczna;62;85;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona. Stare komnaty Gomeza w wewnXtrznym pierXcieniu. Przy peXzaczach w XwiXtyni XniXcego.
+91;CiXki DwurXczniak;DwurXczna;64;86;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona.
+92;Gniewna Stal;DwurXczna;66;88;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona. Przy peXzaczach w XwiXtyni XniXcego.
+93;WXciekXa Stal;DwurXczna;68;90;W piXtym rozdziale moXna kupiX u Darriona i Skorpiona. Przy peXzaczach w XwiXtyni XniXcego.
+94;Miecz Thorusa;DwurXczna;75;90;Posiada go Thorus.
+95;MXciwa Stal;DwurXczna;70;92;W piXtym rozdziale moXna kupiX u Darriona, jest takXe przy Skorpionie.W XwiXtyni XniXcego.
+96;TopXr Wojenny;DwurXczna;72;94;W piXtym rozdziale moXna kupiX u Sharky'ego.
+97;TopXr Orika;DwurXczna;90;95;Posiada go Orik.
+98;Krzyk Wojownika;DwurXczna;74;96;W piXtym rozdziale moXna kupiX u Sharky'ego.
+99;PiXX BarbarzyXcy;DwurXczna;76;98;W piXtym rozdziale moXna kupiX u Sharky'ego. W XwiXtyni XniXcego niedaleko ukrytego wyjXcia z tunelu przy moXcie nad lawX.
+100;TopXr Torlofa;DwurXczna;85;99;Posiada go Torlof.
+101;PiXX Trolla;DwurXczna;78;100;W piXtym rozdziale moXna kupiX u Sharky'ego. W XwiXtyni XniXcego przy szamanie Grash-Varrag-Arushat. W piXtym rozdziale skrzynia Gomeza.
+102;Zemsta Gorna;DwurXczna;80;100;Posiada jX Gorn.
+103;Czerwony Wiatr;DwurXczna;80;105;Posiada go Cor Angar.
+104;TopXr Lee;DwurXczna;95;105;Posiada go Lee.
+105;Gniew Innosa;DwurXczna;90;110;Posiada go Gomez.
+106;Uriziel;DwurXczna;30;150;Przedmiot z zadania. BroX trzeba zidentyfikowaX u Xardasa, naXadowaX za pomocX kopca rudy w Nowym Obozie i pokonaX ostatniego szamana w XwiXtyni XniXcego.

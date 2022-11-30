@@ -41,7 +41,7 @@ public class Main {
     Gson gsonBuilder = new Gson();
 
     JdbcService jdbcService;
-    jdbcService = new JdbcService("jdbc:sqlite:tempDb", "bron_b.csv");
+    jdbcService = new JdbcService("jdbc:sqlite:tempDb", "src/resources/bron_b.csv");
 
     UserRepository userRepository = new UserRepository(jdbcService.getConnection());
     MeleeRepository meleeRepository = new MeleeRepository(jdbcService.getConnection());
