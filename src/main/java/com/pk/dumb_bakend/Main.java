@@ -382,13 +382,13 @@ public class Main {
 
     // session
     post(
-        "/login/",
+        "/login/:email",
         (req, resp) -> {
           try {
-            userRepository.get();
+            User user = userRepository.getByEmail(req.params(":email"));
             return JWT.create()
-                .withClaim("id", "testUser")
-                .withClaim("role", "mod")
+                .withClaim("email", user.getEmail())
+                .withClaim("role", user.getRole())
                 .withExpiresAt(Date.from(Instant.now().plusSeconds(3600)))
                 .sign(algorithm);
           } catch (JWTCreationException exception) {

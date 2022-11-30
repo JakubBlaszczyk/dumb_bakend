@@ -19,6 +19,26 @@ public class UserRepository {
     this.databaseConnection = databaseConnection;
   }
 
+  public User getByEmail(String email) {
+    String sql = "SELECT id, email, nick, password, role FROM users WHERE email = ?";
+    try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
+      preparedStatement.setString(1, email);
+      ResultSet rs = preparedStatement.executeQuery(sql);
+
+      User user = new User();
+      rs.next();
+      user.setIdUser(rs.getInt("id"));
+      user.setEmail(rs.getString("email"));
+      user.setNick(rs.getString("nick"));
+      user.setEmail(rs.getString("password"));
+      user.setRole(rs.getString("role"));
+      return user;
+    } catch (SQLException e) {
+      log.error(e.getMessage());
+    }
+    return null;
+  }
+
   public User get(Integer id) {
     String sql = "SELECT id, email, nick, password, role FROM users WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
