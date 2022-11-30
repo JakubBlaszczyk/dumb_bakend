@@ -139,13 +139,13 @@ public class JdbcService {
     }
   }
 
-  private void createMeleeDatabase(String meleeCsvPath) {
+  private void createSpellDatabase(String meleeCsvPath) {
     final String SQL_DROP = "DROP TABLE IF EXISTS melee";
     final String SQL_CREATE =
-        "CREATE TABLE melee (id int not null, name char(64), type char(64), strengthReq int, damage"
+        "CREATE TABLE spell (idSpell int not null, name char(64), effect char(64), manaCost int, requiredLevel"
             + " int, location char(1024))";
     final String SQL_INSERT =
-        "INSERT INTO melee(id, name, type, strengthReq, damage, location)"
+        "INSERT INTO spell (idSpell, name, effect, manaCost, requiredLevel, location)"
             + " VALUES(?,?,?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
@@ -164,7 +164,7 @@ public class JdbcService {
         preparedStatement.setInt(1, Integer.parseInt(csvLine[0]));
         preparedStatement.setString(2, csvLine[1]);
         preparedStatement.setString(3, csvLine[2]);
-        preparedStatement.setInt(4, Integer.parseInt(csvLine[3]));
+        preparedStatement.setString(4, csvLine[3]);
         preparedStatement.setInt(5, Integer.parseInt(csvLine[4]));
         preparedStatement.setString(6, csvLine[5]);
         preparedStatement.executeUpdate();
@@ -177,14 +177,13 @@ public class JdbcService {
     }
   }
 
-  private void createMeleeDatabase(String meleeCsvPath) {
-    final String SQL_DROP = "DROP TABLE IF EXISTS melee";
+  private void createUserDatabase(String meleeCsvPath) {
+    final String SQL_DROP = "DROP TABLE IF EXISTS user";
     final String SQL_CREATE =
-        "CREATE TABLE melee (id int not null, name char(64), type char(64), strengthReq int, damage"
-            + " int, location char(1024))";
+        "CREATE TABLE user (idUser int not null, email char(64), nick char(64), password char(64), role char(64))";
     final String SQL_INSERT =
-        "INSERT INTO melee(id, name, type, strengthReq, damage, location)"
-            + " VALUES(?,?,?,?,?,?)";
+        "INSERT INTO user (idUser, email, nick, password, role)"
+            + " VALUES(?,?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
       statement.executeUpdate(SQL_CREATE);
@@ -202,12 +201,10 @@ public class JdbcService {
         preparedStatement.setInt(1, Integer.parseInt(csvLine[0]));
         preparedStatement.setString(2, csvLine[1]);
         preparedStatement.setString(3, csvLine[2]);
-        preparedStatement.setInt(4, Integer.parseInt(csvLine[3]));
-        preparedStatement.setInt(5, Integer.parseInt(csvLine[4]));
-        preparedStatement.setString(6, csvLine[5]);
+        preparedStatement.setString(4, csvLine[3]);
+        preparedStatement.setString(5, csvLine[4]);
         preparedStatement.executeUpdate();
       }
-
     } catch (IOException | CsvValidationException ex) {
       log.error(ex.getMessage(), ex);
     } catch (SQLException e) {
