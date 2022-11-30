@@ -13,7 +13,7 @@ public class JdbcService {
 
   private Connection connection;
 
-  private JdbcService() {}
+  public JdbcService() {}
 
   public void createConnection(String url) {
     this.connection = null;

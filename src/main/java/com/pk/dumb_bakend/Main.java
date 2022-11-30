@@ -14,13 +14,20 @@ import com.pk.dumb_bakend.repository.RangedRepository;
 import com.pk.dumb_bakend.repository.SpellRepository;
 import com.pk.dumb_bakend.repository.UserRepository;
 
+import java.time.Instant;
+import java.util.Date;
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTCreationException;
 public class Main {
 
   private static JdbcService jdbcService;
 
   public static void main(String[] args) {
 
-    jdbcService.createConnection("jdbc:sqlite:path");
+    jdbcService = new JdbcService();
+    jdbcService.createConnection("jdbc:sqlite:tempDb");
     Gson gsonBuilder = new Gson();
     // String id = req.params(":id");
     // armor
@@ -143,16 +150,21 @@ public class Main {
         });
 
     // session
-    post(
-        "/login",
-        (req, resp) -> {
-          return "X";
-        });
-    post(
-        "/register",
-        (req, resp) -> {
-          return "X";
-        });
+    post("/login", (req, resp) -> {
+      try {
+        Algorithm algorithm = Algorithm.HMAC256("supertajemnysekret");
+        return JWT.create()
+          .withClaim("test1", "yyyyyy")
+          .withClaim("test2", "zzzzzz")
+          .withExpiresAt(Date.from(Instant.now().plusSeconds(3600)))
+          .sign(algorithm);
+      } catch (JWTCreationException exception){
+       throw new RuntimeException("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+     }
+    });
+    post("/register", (req, resp) -> {
+      return "X";
+    });
 
     // spell
     SpellRepository spellRepository = new SpellRepository(jdbcService.getConnection());
