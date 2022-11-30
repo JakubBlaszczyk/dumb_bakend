@@ -20,9 +20,19 @@ public class JdbcService {
 
   private Connection connection;
 
-  public JdbcService(String url, String meleeCsvPath) {
+  public JdbcService(
+      String url,
+      String meleeCsvPath,
+      String potionCsvPath,
+      String rangedCsvPath,
+      String spellCsvPath,
+      String userCsvPath) {
     createConnection(url);
     createMeleeDatabase(meleeCsvPath);
+    createPotionDatabase(potionCsvPath);
+    createRangedDatabase(rangedCsvPath);
+    createSpellDatabase(spellCsvPath);
+    createUserDatabase(userCsvPath);
   }
 
   private void createMeleeDatabase(String meleeCsvPath) {
@@ -31,8 +41,7 @@ public class JdbcService {
         "CREATE TABLE melee (id int not null, name char(64), type char(64), strengthReq int, damage"
             + " int, location char(1024))";
     final String SQL_INSERT =
-        "INSERT INTO melee(id, name, type, strengthReq, damage, location)"
-            + " VALUES(?,?,?,?,?,?)";
+        "INSERT INTO melee(id, name, type, strengthReq, damage, location)" + " VALUES(?,?,?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
       statement.executeUpdate(SQL_CREATE);
@@ -63,21 +72,19 @@ public class JdbcService {
     }
   }
 
-  private void createMeleeDatabase(String meleeCsvPath) {
-    final String SQL_DROP = "DROP TABLE IF EXISTS melee";
+  private void createPotionDatabase(String potionCsvPath) {
+    final String SQL_DROP = "DROP TABLE IF EXISTS potion";
     final String SQL_CREATE =
-        "CREATE TABLE melee (id int not null, name char(64), type char(64), strengthReq int, damage"
-            + " int, location char(1024))";
-    final String SQL_INSERT =
-        "INSERT INTO melee(id, name, type, strengthReq, damage, location)"
-            + " VALUES(?,?,?,?,?,?)";
+        "CREATE TABLE potion (id int not null, name char(64), effect char(64), location"
+            + " char(1024))";
+    final String SQL_INSERT = "INSERT INTO potion(id, name, effect, location)" + " VALUES(?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
       statement.executeUpdate(SQL_CREATE);
     } catch (SQLException e) {
       log.error(e.getMessage(), e);
     }
-    try (Reader reader = Files.newBufferedReader(Paths.get(meleeCsvPath));
+    try (Reader reader = Files.newBufferedReader(Paths.get(potionCsvPath));
         CSVReader csvReader = new CSVReader(reader);
         PreparedStatement preparedStatement = this.connection.prepareStatement(SQL_INSERT)) {
 
@@ -88,9 +95,7 @@ public class JdbcService {
         preparedStatement.setInt(1, Integer.parseInt(csvLine[0]));
         preparedStatement.setString(2, csvLine[1]);
         preparedStatement.setString(3, csvLine[2]);
-        preparedStatement.setInt(4, Integer.parseInt(csvLine[3]));
-        preparedStatement.setInt(5, Integer.parseInt(csvLine[4]));
-        preparedStatement.setString(6, csvLine[5]);
+        preparedStatement.setString(4, csvLine[3]);
         preparedStatement.executeUpdate();
       }
 
@@ -101,21 +106,20 @@ public class JdbcService {
     }
   }
 
-  private void createMeleeDatabase(String meleeCsvPath) {
-    final String SQL_DROP = "DROP TABLE IF EXISTS melee";
+  private void createRangedDatabase(String rangedCsvPath) {
+    final String SQL_DROP = "DROP TABLE IF EXISTS ranged";
     final String SQL_CREATE =
-        "CREATE TABLE melee (id int not null, name char(64), type char(64), strengthReq int, damage"
-            + " int, location char(1024))";
+        "CREATE TABLE ranged (id int not null, name char(64), requirement int, damage int, location"
+            + " char(1024))";
     final String SQL_INSERT =
-        "INSERT INTO melee(id, name, type, strengthReq, damage, location)"
-            + " VALUES(?,?,?,?,?,?)";
+        "INSERT INTO ranged(id, name, requirement, damage, location)" + " VALUES(?,?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
       statement.executeUpdate(SQL_CREATE);
     } catch (SQLException e) {
       log.error(e.getMessage(), e);
     }
-    try (Reader reader = Files.newBufferedReader(Paths.get(meleeCsvPath));
+    try (Reader reader = Files.newBufferedReader(Paths.get(rangedCsvPath));
         CSVReader csvReader = new CSVReader(reader);
         PreparedStatement preparedStatement = this.connection.prepareStatement(SQL_INSERT)) {
 
@@ -125,10 +129,9 @@ public class JdbcService {
         csvLine = csvRead[0].split(";", 0);
         preparedStatement.setInt(1, Integer.parseInt(csvLine[0]));
         preparedStatement.setString(2, csvLine[1]);
-        preparedStatement.setString(3, csvLine[2]);
+        preparedStatement.setInt(3, Integer.parseInt(csvLine[2]));
         preparedStatement.setInt(4, Integer.parseInt(csvLine[3]));
-        preparedStatement.setInt(5, Integer.parseInt(csvLine[4]));
-        preparedStatement.setString(6, csvLine[5]);
+        preparedStatement.setString(5, csvLine[4]);
         preparedStatement.executeUpdate();
       }
 
@@ -139,11 +142,11 @@ public class JdbcService {
     }
   }
 
-  private void createSpellDatabase(String meleeCsvPath) {
-    final String SQL_DROP = "DROP TABLE IF EXISTS melee";
+  private void createSpellDatabase(String userCsvPath) {
+    final String SQL_DROP = "DROP TABLE IF EXISTS spell";
     final String SQL_CREATE =
-        "CREATE TABLE spell (idSpell int not null, name char(64), effect char(64), manaCost int, requiredLevel"
-            + " int, location char(1024))";
+        "CREATE TABLE spell (idSpell int not null, name char(64), effect char(64), manaCost int,"
+            + " requiredLevel int, location char(1024))";
     final String SQL_INSERT =
         "INSERT INTO spell (idSpell, name, effect, manaCost, requiredLevel, location)"
             + " VALUES(?,?,?,?,?,?)";
@@ -153,7 +156,7 @@ public class JdbcService {
     } catch (SQLException e) {
       log.error(e.getMessage(), e);
     }
-    try (Reader reader = Files.newBufferedReader(Paths.get(meleeCsvPath));
+    try (Reader reader = Files.newBufferedReader(Paths.get(userCsvPath));
         CSVReader csvReader = new CSVReader(reader);
         PreparedStatement preparedStatement = this.connection.prepareStatement(SQL_INSERT)) {
 
@@ -177,20 +180,20 @@ public class JdbcService {
     }
   }
 
-  private void createUserDatabase(String meleeCsvPath) {
+  private void createUserDatabase(String userCsvPath) {
     final String SQL_DROP = "DROP TABLE IF EXISTS user";
     final String SQL_CREATE =
-        "CREATE TABLE user (idUser int not null, email char(64), nick char(64), password char(64), role char(64))";
+        "CREATE TABLE user (idUser int not null, email char(64), nick char(64), password char(64),"
+            + " role char(64))";
     final String SQL_INSERT =
-        "INSERT INTO user (idUser, email, nick, password, role)"
-            + " VALUES(?,?,?,?,?)";
+        "INSERT INTO user (idUser, email, nick, password, role)" + " VALUES(?,?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
       statement.executeUpdate(SQL_CREATE);
     } catch (SQLException e) {
       log.error(e.getMessage(), e);
     }
-    try (Reader reader = Files.newBufferedReader(Paths.get(meleeCsvPath));
+    try (Reader reader = Files.newBufferedReader(Paths.get(userCsvPath));
         CSVReader csvReader = new CSVReader(reader);
         PreparedStatement preparedStatement = this.connection.prepareStatement(SQL_INSERT)) {
 

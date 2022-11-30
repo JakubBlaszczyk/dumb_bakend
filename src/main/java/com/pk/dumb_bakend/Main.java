@@ -41,7 +41,14 @@ public class Main {
     Gson gsonBuilder = new Gson();
 
     JdbcService jdbcService;
-    jdbcService = new JdbcService("jdbc:sqlite:tempDb", "src/resources/bron_b.csv");
+    jdbcService =
+        new JdbcService(
+            "jdbc:sqlite:tempDb",
+            "src/resources/bron_b.csv",
+            "src/resources/eliksiry.csv",
+            "src/resources/bron_d.csv",
+            "src/resources/czary.csv",
+            "src/resources/uzytkownicy.csv");
 
     UserRepository userRepository = new UserRepository(jdbcService.getConnection());
     MeleeRepository meleeRepository = new MeleeRepository(jdbcService.getConnection());
@@ -50,10 +57,12 @@ public class Main {
     SpellRepository spellRepository = new SpellRepository(jdbcService.getConnection());
     Algorithm algorithm = Algorithm.HMAC256("supertajemnysekret");
 
-    exception(Exception.class, (e, request, response) -> {
-      System.out.println("EXCEPTION");
-      e.printStackTrace();
-    });
+    exception(
+        Exception.class,
+        (e, request, response) -> {
+          System.out.println("EXCEPTION");
+          e.printStackTrace();
+        });
 
     // TODO armor SQL not ready
     get(
@@ -136,8 +145,7 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-            meleeRepository.get(Integer.parseInt(req.params(":id"))));
+          return gsonBuilder.toJson(meleeRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/melee/all",
@@ -222,8 +230,7 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-            potionRepository.get(Integer.parseInt(req.params(":id"))));
+          return gsonBuilder.toJson(potionRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/potion/all",
@@ -308,8 +315,7 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-            rangedRepository.get(Integer.parseInt(req.params(":id"))));
+          return gsonBuilder.toJson(rangedRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/ranged/all",
@@ -416,8 +422,7 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              spellRepository.get(Integer.parseInt(req.params(":id"))));
+          return gsonBuilder.toJson(spellRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/spell/all",
@@ -502,8 +507,7 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-            userRepository.get(Integer.parseInt(req.params(":id"))));
+          return gsonBuilder.toJson(userRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/user/all",
