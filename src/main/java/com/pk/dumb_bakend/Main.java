@@ -2,10 +2,20 @@ package com.pk.dumb_bakend;
 
 import static spark.Spark.*;
 
+import org.eclipse.jetty.security.JDBCLoginService;
+
+import com.pk.dumb_bakend.model.Armor;
+
 public class Main {
+
+  private static JdbcService jdbcService;
     public static void main(String[] args) {
+
+      // jdbcService.createConnection("jdbc:sqlite:path");
       // String id = req.params(":id");
       // armor
+
+      Armor armor;
       get("/armor", (req, resp) -> {
         return "X";
       });
