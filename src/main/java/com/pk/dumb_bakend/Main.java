@@ -56,8 +56,9 @@ public class Main {
       e.printStackTrace();
     });
 
+    // TODO armor SQL not ready
     get(
-        "/armor",
+        "/armor/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -123,7 +124,7 @@ public class Main {
 
     // melee
     get(
-        "/melee",
+        "/melee/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -137,7 +138,7 @@ public class Main {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
-              meleeRepository.get(gsonBuilder.fromJson(req.body(), Integer.class)));
+            meleeRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/melee/all",
@@ -209,7 +210,7 @@ public class Main {
 
     // potion
     get(
-        "/potion",
+        "/potion/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -223,7 +224,7 @@ public class Main {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
-              potionRepository.get(gsonBuilder.fromJson(req.body(), Integer.class)));
+            potionRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/potion/all",
@@ -295,7 +296,7 @@ public class Main {
 
     // ranged
     get(
-        "/ranged",
+        "/ranged/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -309,7 +310,7 @@ public class Main {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
-              rangedRepository.get(gsonBuilder.fromJson(req.body(), Integer.class)));
+            rangedRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/ranged/all",
@@ -381,9 +382,10 @@ public class Main {
 
     // session
     post(
-        "/login",
+        "/login/",
         (req, resp) -> {
           try {
+            userRepository.get();
             return JWT.create()
                 .withClaim("id", "testUser")
                 .withClaim("role", "mod")
@@ -397,12 +399,12 @@ public class Main {
         "/register",
         (req, resp) -> {
           userRepository.create(gsonBuilder.fromJson(req.body(), User.class));
-          return "X";
+          return gsonBuilder.fromJson(req.body(), User.class);
         });
 
     // spell
     get(
-        "/spell",
+        "/spell/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -416,7 +418,7 @@ public class Main {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
-              spellRepository.get(gsonBuilder.fromJson(req.body(), Integer.class)));
+              spellRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/spell/all",
@@ -488,7 +490,7 @@ public class Main {
 
     // users
     get(
-        "/user",
+        "/user/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -502,7 +504,7 @@ public class Main {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
-              userRepository.get(gsonBuilder.fromJson(req.body(), Integer.class)));
+            userRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
         "/user/all",
