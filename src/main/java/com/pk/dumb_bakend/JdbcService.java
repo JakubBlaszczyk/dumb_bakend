@@ -3,9 +3,12 @@ package com.pk.dumb_bakend;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Data
 public class JdbcService {
 
   private Connection connection;

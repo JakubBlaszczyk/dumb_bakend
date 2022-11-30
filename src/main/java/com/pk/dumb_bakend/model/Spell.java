@@ -7,7 +7,7 @@ public class Spell {
   Integer idSpell;
   String name;
   String effect;
-  Integer manaCost;
+  String manaCost;
   Integer requiredLevel;
   String location;
 }

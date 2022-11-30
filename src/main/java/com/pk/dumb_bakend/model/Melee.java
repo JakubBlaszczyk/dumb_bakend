@@ -6,6 +6,7 @@ import lombok.Data;
 public class Melee {
   Integer idWeapon;
   String name;
+  String type;
   Integer strengthReq;
   Integer damage;
   String location;

@@ -6,7 +6,7 @@ import lombok.Data;
 public class Ranged {
   Integer idWeapon;
   String name;
-  String dexReq;
-  String damage;
+  Integer requirement;
+  Integer damage;
   String location;
 }
