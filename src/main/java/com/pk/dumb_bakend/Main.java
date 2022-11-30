@@ -22,13 +22,19 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 public class Main {
 
-  private static JdbcService jdbcService;
-
   public static void main(String[] args) {
-
+    Gson gsonBuilder = new Gson();
+    
+    JdbcService jdbcService;
     jdbcService = new JdbcService();
     jdbcService.createConnection("jdbc:sqlite:tempDb");
-    Gson gsonBuilder = new Gson();
+
+    UserRepository userRepository = new UserRepository(jdbcService.getConnection());
+    MeleeRepository meleeRepository = new MeleeRepository(jdbcService.getConnection());
+    PotionRepository potionRepository = new PotionRepository(jdbcService.getConnection());
+    RangedRepository rangedRepository = new RangedRepository(jdbcService.getConnection());
+    SpellRepository spellRepository = new SpellRepository(jdbcService.getConnection());
+  
     // String id = req.params(":id");
     // armor
     // ArmorRepository armorRepository = new ArmorRepository(jdbcService.getConnection());
@@ -54,7 +60,6 @@ public class Main {
         });
 
     // melee
-    MeleeRepository meleeRepository = new MeleeRepository(jdbcService.getConnection());
     get(
         "/melee",
         (req, resp) -> {
@@ -86,7 +91,6 @@ public class Main {
         });
 
     // potion
-    PotionRepository potionRepository = new PotionRepository(jdbcService.getConnection());
     get(
         "/potion",
         (req, resp) -> {
@@ -118,7 +122,6 @@ public class Main {
         });
 
     // ranged
-    RangedRepository rangedRepository = new RangedRepository(jdbcService.getConnection());
     get(
         "/ranged",
         (req, resp) -> {
@@ -163,11 +166,11 @@ public class Main {
      }
     });
     post("/register", (req, resp) -> {
+      userRepository.create(gsonBuilder.fromJson(req.body(), User.class));
       return "X";
     });
 
     // spell
-    SpellRepository spellRepository = new SpellRepository(jdbcService.getConnection());
     get(
         "/spell",
         (req, resp) -> {
@@ -199,7 +202,6 @@ public class Main {
         });
 
     // users
-    UserRepository userRepository = new UserRepository(jdbcService.getConnection());
     get(
         "/user",
         (req, resp) -> {
