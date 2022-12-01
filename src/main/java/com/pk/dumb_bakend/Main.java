@@ -22,7 +22,9 @@ import com.pk.dumb_bakend.repository.SpellRepository;
 import com.pk.dumb_bakend.repository.UserRepository;
 import java.time.Instant;
 import java.util.Date;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class Main {
 
   private static boolean checkPrivs(String reqRole, String jwtRole) {
@@ -64,7 +66,7 @@ public class Main {
     exception(
         Exception.class,
         (e, request, response) -> {
-          System.out.println("EXCEPTION");
+          log.error("Exception msg: " + e.getMessage());
           e.printStackTrace();
         });
 
@@ -78,7 +80,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -94,7 +97,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -110,7 +114,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -127,7 +132,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -135,7 +141,7 @@ public class Main {
               armorRepository.update(gsonBuilder.fromJson(req.body(), Armor.class)));
         });
     delete(
-        "/armor",
+        "/armor/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -144,12 +150,12 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              armorRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
+          return gsonBuilder.toJson(armorRepository.delete(Integer.parseInt(req.params(":id"))));
         });
 
     // melee
@@ -163,7 +169,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -179,7 +186,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -195,7 +203,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -212,7 +221,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -220,7 +230,7 @@ public class Main {
               meleeRepository.update(gsonBuilder.fromJson(req.body(), Melee.class)));
         });
     delete(
-        "/melee",
+        "/melee/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -229,12 +239,12 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              meleeRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
+          return gsonBuilder.toJson(meleeRepository.delete(Integer.parseInt(req.params(":id"))));
         });
 
     // potion
@@ -248,7 +258,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -264,7 +275,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -280,7 +292,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -297,7 +310,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -305,7 +319,7 @@ public class Main {
               potionRepository.update(gsonBuilder.fromJson(req.body(), Potion.class)));
         });
     delete(
-        "/potion",
+        "/potion/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -314,12 +328,12 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              potionRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
+          return gsonBuilder.toJson(potionRepository.delete(Integer.parseInt(req.params(":id"))));
         });
 
     // ranged
@@ -333,7 +347,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -349,7 +364,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -365,7 +381,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -382,7 +399,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -390,7 +408,7 @@ public class Main {
               rangedRepository.update(gsonBuilder.fromJson(req.body(), Ranged.class)));
         });
     delete(
-        "/ranged",
+        "/ranged/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -399,12 +417,12 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              rangedRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
+          return gsonBuilder.toJson(rangedRepository.delete(Integer.parseInt(req.params(":id"))));
         });
 
     // session
@@ -440,7 +458,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -456,7 +475,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -472,7 +492,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -489,7 +510,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -497,7 +519,7 @@ public class Main {
               spellRepository.update(gsonBuilder.fromJson(req.body(), Spell.class)));
         });
     delete(
-        "/spell",
+        "/spell/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -506,12 +528,12 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              spellRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
+          return gsonBuilder.toJson(spellRepository.delete(Integer.parseInt(req.params(":id"))));
         });
 
     // users
@@ -525,7 +547,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -541,7 +564,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -557,7 +581,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -574,7 +599,8 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
@@ -582,7 +608,7 @@ public class Main {
               userRepository.update(gsonBuilder.fromJson(req.body(), User.class)));
         });
     delete(
-        "/user",
+        "/user/:id",
         (req, resp) -> {
           try {
             DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -591,12 +617,12 @@ public class Main {
               return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
             }
           } catch (Exception e) {
-            System.out.println("Exception msg: " + e.getMessage());
+            log.error("Exception msg: " + e.getMessage());
+            e.printStackTrace();
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return gsonBuilder.toJson(
-              spellRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
+          return gsonBuilder.toJson(spellRepository.delete(Integer.parseInt(req.params(":id"))));
         });
   }
 }
