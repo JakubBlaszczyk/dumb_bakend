@@ -34,7 +34,7 @@ public class RangedRepository {
       ranged.setLocation(rs.getString("location"));
       return ranged;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -51,7 +51,7 @@ public class RangedRepository {
       preparedStatement.executeUpdate();
       return newRanged;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -68,7 +68,7 @@ public class RangedRepository {
       preparedStatement.executeUpdate();
       return updatedRanged;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -81,7 +81,7 @@ public class RangedRepository {
       preparedStatement.executeUpdate();
       return deletedRanged;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -103,7 +103,7 @@ public class RangedRepository {
       }
       return rangedList;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return Collections.emptyList();
   }

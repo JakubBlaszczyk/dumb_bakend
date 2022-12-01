@@ -35,7 +35,7 @@ public class MeleeRepository {
       melee.setLocation(rs.getString("location"));
       return melee;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -49,11 +49,11 @@ public class MeleeRepository {
       preparedStatement.setString(3, newMelee.getType());
       preparedStatement.setInt(4, newMelee.getStrengthReq());
       preparedStatement.setInt(5, newMelee.getDamage());
-      preparedStatement.setString(4, newMelee.getLocation());
+      preparedStatement.setString(6, newMelee.getLocation());
       preparedStatement.executeUpdate();
       return newMelee;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -72,7 +72,7 @@ public class MeleeRepository {
       preparedStatement.executeUpdate();
       return updatedMelee;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -85,7 +85,7 @@ public class MeleeRepository {
       preparedStatement.executeUpdate();
       return deletedMelee;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -108,7 +108,7 @@ public class MeleeRepository {
       }
       return meleeList;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return Collections.emptyList();
   }

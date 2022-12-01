@@ -36,7 +36,7 @@ public class SpellRepository {
       spell.setLocation(rs.getString("location"));
       return spell;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -56,7 +56,7 @@ public class SpellRepository {
       preparedStatement.executeUpdate();
       return newSpell;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -75,7 +75,7 @@ public class SpellRepository {
       preparedStatement.executeUpdate();
       return updatedSpell;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -88,7 +88,7 @@ public class SpellRepository {
       preparedStatement.executeUpdate();
       return deletedSpell;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -111,7 +111,7 @@ public class SpellRepository {
       }
       return spellList;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return Collections.emptyList();
   }

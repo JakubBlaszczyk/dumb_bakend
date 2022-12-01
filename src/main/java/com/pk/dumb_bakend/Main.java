@@ -7,12 +7,14 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.gson.Gson;
+import com.pk.dumb_bakend.model.Armor;
 import com.pk.dumb_bakend.model.Err;
 import com.pk.dumb_bakend.model.Melee;
 import com.pk.dumb_bakend.model.Potion;
 import com.pk.dumb_bakend.model.Ranged;
 import com.pk.dumb_bakend.model.Spell;
 import com.pk.dumb_bakend.model.User;
+import com.pk.dumb_bakend.repository.ArmorRepository;
 import com.pk.dumb_bakend.repository.MeleeRepository;
 import com.pk.dumb_bakend.repository.PotionRepository;
 import com.pk.dumb_bakend.repository.RangedRepository;
@@ -44,6 +46,7 @@ public class Main {
     jdbcService =
         new JdbcService(
             "jdbc:sqlite:tempDb",
+            "src/resources/zbroje.csv",
             "src/resources/bron_b.csv",
             "src/resources/eliksiry.csv",
             "src/resources/bron_d.csv",
@@ -51,6 +54,7 @@ public class Main {
             "src/resources/uzytkownicy.csv");
 
     UserRepository userRepository = new UserRepository(jdbcService.getConnection());
+    ArmorRepository armorRepository = new ArmorRepository(jdbcService.getConnection());
     MeleeRepository meleeRepository = new MeleeRepository(jdbcService.getConnection());
     PotionRepository potionRepository = new PotionRepository(jdbcService.getConnection());
     RangedRepository rangedRepository = new RangedRepository(jdbcService.getConnection());
@@ -64,7 +68,6 @@ public class Main {
           e.printStackTrace();
         });
 
-    // TODO armor SQL not ready
     get(
         "/armor/:id",
         (req, resp) -> {
@@ -79,7 +82,23 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return "X";
+          return gsonBuilder.toJson(armorRepository.get(Integer.parseInt(req.params(":id"))));
+        });
+    get(
+        "/armor/all",
+        (req, resp) -> {
+          try {
+            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
+            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
+              resp.status(403);
+              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
+            }
+          } catch (Exception e) {
+            System.out.println("Exception msg: " + e.getMessage());
+            resp.status(403);
+            return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
+          }
+          return gsonBuilder.toJson(armorRepository.getAll());
         });
     post(
         "/armor",
@@ -95,7 +114,8 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return "X";
+          return gsonBuilder.toJson(
+              armorRepository.create(gsonBuilder.fromJson(req.body(), Armor.class)));
         });
     put(
         "/armor",
@@ -111,7 +131,8 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return "X";
+          return gsonBuilder.toJson(
+              armorRepository.update(gsonBuilder.fromJson(req.body(), Armor.class)));
         });
     delete(
         "/armor",
@@ -127,7 +148,8 @@ public class Main {
             resp.status(403);
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
-          return "X";
+          return gsonBuilder.toJson(
+              armorRepository.delete(gsonBuilder.fromJson(req.body(), Integer.class)));
         });
 
     // melee

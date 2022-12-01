@@ -34,7 +34,7 @@ public class UserRepository {
       user.setRole(rs.getString("role"));
       return user;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -54,7 +54,7 @@ public class UserRepository {
       user.setRole(rs.getString("role"));
       return user;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -71,7 +71,7 @@ public class UserRepository {
       preparedStatement.executeUpdate();
       return newUser;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -87,7 +87,7 @@ public class UserRepository {
       preparedStatement.executeUpdate();
       return updatedUser;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -100,7 +100,7 @@ public class UserRepository {
       preparedStatement.executeUpdate();
       return deletedUser;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -122,7 +122,7 @@ public class UserRepository {
       }
       return userList;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return Collections.emptyList();
   }

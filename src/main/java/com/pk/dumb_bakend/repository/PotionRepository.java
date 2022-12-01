@@ -34,7 +34,7 @@ public class PotionRepository {
       potion.setLocation(rs.getString("location"));
       return potion;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -49,7 +49,7 @@ public class PotionRepository {
       preparedStatement.executeUpdate();
       return newPotion;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -64,7 +64,7 @@ public class PotionRepository {
       preparedStatement.executeUpdate();
       return updatedPotion;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -77,7 +77,7 @@ public class PotionRepository {
       preparedStatement.executeUpdate();
       return deletedPotion;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return null;
   }
@@ -98,7 +98,7 @@ public class PotionRepository {
       }
       return potionList;
     } catch (SQLException e) {
-      log.error(e.getMessage());
+      log.error(e.getMessage(), e);
     }
     return Collections.emptyList();
   }

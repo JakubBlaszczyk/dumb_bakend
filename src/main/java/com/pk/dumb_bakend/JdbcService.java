@@ -22,17 +22,56 @@ public class JdbcService {
 
   public JdbcService(
       String url,
+      String armorCsvPath,
       String meleeCsvPath,
       String potionCsvPath,
       String rangedCsvPath,
       String spellCsvPath,
       String userCsvPath) {
     createConnection(url);
+    createArmorDatabase(armorCsvPath);
     createMeleeDatabase(meleeCsvPath);
     createPotionDatabase(potionCsvPath);
     createRangedDatabase(rangedCsvPath);
     createSpellDatabase(spellCsvPath);
     createUserDatabase(userCsvPath);
+  }
+
+  private void createArmorDatabase(String armorCsvPath) {
+    final String SQL_DROP = "DROP TABLE IF EXISTS armor";
+    final String SQL_CREATE =
+        "CREATE TABLE armor (id int not null, name char(64), meleeRes int, rangedRes int, fireRes"
+            + " int, magicRes int)";
+    final String SQL_INSERT =
+        "INSERT INTO armor(id, name, meleeRes, rangedRes, fireRes, magicRes) VALUES(?,?,?,?,?,?)";
+    try (Statement statement = this.connection.createStatement()) {
+      statement.executeUpdate(SQL_DROP);
+      statement.executeUpdate(SQL_CREATE);
+    } catch (SQLException e) {
+      log.error(e.getMessage(), e);
+    }
+    try (Reader reader = Files.newBufferedReader(Paths.get(armorCsvPath));
+        CSVReader csvReader = new CSVReader(reader);
+        PreparedStatement preparedStatement = this.connection.prepareStatement(SQL_INSERT)) {
+
+      String[] csvRead;
+      String[] csvLine;
+      while ((csvRead = csvReader.readNext()) != null) {
+        csvLine = csvRead[0].split(";", 0);
+        preparedStatement.setInt(1, Integer.parseInt(csvLine[0]));
+        preparedStatement.setString(2, csvLine[1]);
+        preparedStatement.setInt(3, Integer.parseInt(csvLine[2]));
+        preparedStatement.setInt(4, Integer.parseInt(csvLine[3]));
+        preparedStatement.setInt(5, Integer.parseInt(csvLine[4]));
+        preparedStatement.setInt(6, Integer.parseInt(csvLine[5]));
+        preparedStatement.executeUpdate();
+      }
+
+    } catch (IOException | CsvValidationException ex) {
+      log.error(ex.getMessage(), ex);
+    } catch (SQLException e) {
+      log.error(e.getMessage(), e);
+    }
   }
 
   private void createMeleeDatabase(String meleeCsvPath) {
