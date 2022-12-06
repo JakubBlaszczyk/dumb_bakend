@@ -461,8 +461,11 @@ public class Main {
     post(
         "/register",
         (req, resp) -> {
-          userRepository.create(gsonBuilder.fromJson(req.body(), User.class));
-          return gsonBuilder.fromJson(req.body(), User.class);
+          User user = gsonBuilder.fromJson(req.body(), User.class);
+          user.setPassword(BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray()));
+          user.setRole("User");
+          userRepository.create(user);
+          return gsonBuilder.toJson(user, User.class);
         });
 
     // spell
