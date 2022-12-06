@@ -23,7 +23,11 @@ public class PotionRepository {
     String sql = "SELECT id, name, effect, location FROM potions WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, id);
-      ResultSet rs = preparedStatement.executeQuery(sql);
+      ResultSet rs = preparedStatement.executeQuery();
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       Potion potion = new Potion();
       rs.next();

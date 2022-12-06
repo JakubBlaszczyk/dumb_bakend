@@ -23,7 +23,11 @@ public class RangedRepository {
     String sql = "SELECT id, name, requirement, damage, location FROM ranged WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, id);
-      ResultSet rs = preparedStatement.executeQuery(sql);
+      ResultSet rs = preparedStatement.executeQuery();
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       Ranged ranged = new Ranged();
       rs.next();

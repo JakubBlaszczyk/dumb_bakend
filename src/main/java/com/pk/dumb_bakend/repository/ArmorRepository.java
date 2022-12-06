@@ -23,7 +23,11 @@ public class ArmorRepository {
     String sql = "SELECT id, name, meleeRes, rangedRes, fireRes, magicRes FROM armor WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, id);
-      ResultSet rs = preparedStatement.executeQuery(sql);
+      ResultSet rs = preparedStatement.executeQuery();
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       Armor armor = new Armor();
       rs.next();

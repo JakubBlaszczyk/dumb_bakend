@@ -23,7 +23,11 @@ public class MeleeRepository {
     String sql = "SELECT id, name, type, strengthReq, damage, location FROM melee WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, id);
-      ResultSet rs = preparedStatement.executeQuery(sql);
+      ResultSet rs = preparedStatement.executeQuery();
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       Melee melee = new Melee();
       rs.next();

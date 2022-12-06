@@ -24,7 +24,11 @@ public class SpellRepository {
         "SELECT id, name, effect, manaCost, requiredLevel, location FROM spell WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, id);
-      ResultSet rs = preparedStatement.executeQuery(sql);
+      ResultSet rs = preparedStatement.executeQuery();
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       Spell spell = new Spell();
       rs.next();
@@ -97,6 +101,10 @@ public class SpellRepository {
     String sql = "SELECT id, name, effect, manaCost, requiredLevel, location FROM spell";
     try (Statement statement = this.databaseConnection.createStatement();
         ResultSet rs = statement.executeQuery(sql); ) {
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       ArrayList<Spell> spellList = new ArrayList<>();
       while (rs.next()) {

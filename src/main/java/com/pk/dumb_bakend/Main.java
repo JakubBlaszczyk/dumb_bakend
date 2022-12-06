@@ -9,6 +9,7 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.google.gson.Gson;
 import com.pk.dumb_bakend.model.Armor;
 import com.pk.dumb_bakend.model.Err;
+import com.pk.dumb_bakend.model.LoginData;
 import com.pk.dumb_bakend.model.Melee;
 import com.pk.dumb_bakend.model.Potion;
 import com.pk.dumb_bakend.model.Ranged;
@@ -20,6 +21,9 @@ import com.pk.dumb_bakend.repository.PotionRepository;
 import com.pk.dumb_bakend.repository.RangedRepository;
 import com.pk.dumb_bakend.repository.SpellRepository;
 import com.pk.dumb_bakend.repository.UserRepository;
+
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
 import java.time.Instant;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
@@ -427,10 +431,24 @@ public class Main {
 
     // session
     post(
-        "/login/:email",
+        "/login",
         (req, resp) -> {
           try {
-            User user = userRepository.getByEmail(req.params(":email"));
+            LoginData loginData = gsonBuilder.fromJson(req.body(), LoginData.class);
+            User user = userRepository.getByEmail(loginData.getEmail());
+
+            log.error("UU_Email:" + user.getEmail());
+            log.error("UU_Pass:" + user.getPassword());
+
+            log.error("LD_Email:" + loginData.getEmail());
+            log.error("LD_Pass:" + loginData.getPassword());
+
+            BCrypt.Result res = BCrypt.verifyer().verify(loginData.getPassword().toCharArray(), user.getPassword());
+
+            if (!res.verified) {
+              return gsonBuilder.toJson(new Err("Invalid credentials"), Err.class);
+            }
+
             return JWT.create()
                 .withClaim("email", user.getEmail())
                 .withClaim("role", user.getRole())

@@ -20,17 +20,19 @@ public class UserRepository {
   }
 
   public User getByEmail(String email) {
-    String sql = "SELECT id, email, nick, password, role FROM users WHERE email = ?";
+    String sql = "SELECT idUser, email, nick, password, role FROM user WHERE email = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setString(1, email);
-      ResultSet rs = preparedStatement.executeQuery(sql);
-
+      ResultSet rs = preparedStatement.executeQuery();
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
       User user = new User();
       rs.next();
-      user.setIdUser(rs.getInt("id"));
+      user.setIdUser(rs.getInt("idUser"));
       user.setEmail(rs.getString("email"));
       user.setNick(rs.getString("nick"));
-      user.setEmail(rs.getString("password"));
+      user.setPassword(rs.getString("password"));
       user.setRole(rs.getString("role"));
       return user;
     } catch (SQLException e) {
@@ -39,18 +41,22 @@ public class UserRepository {
     return null;
   }
 
-  public User get(Integer id) {
-    String sql = "SELECT id, email, nick, password, role FROM users WHERE id = ?";
+  public User get(Integer idUser) {
+    String sql = "SELECT idUser, email, nick, password, role FROM user WHERE idUser = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
-      preparedStatement.setInt(1, id);
-      ResultSet rs = preparedStatement.executeQuery(sql);
+      preparedStatement.setInt(1, idUser);
+      ResultSet rs = preparedStatement.executeQuery();
 
       User user = new User();
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
       rs.next();
-      user.setIdUser(rs.getInt("id"));
+      user.setIdUser(rs.getInt("idUser"));
       user.setEmail(rs.getString("email"));
       user.setNick(rs.getString("nick"));
-      user.setEmail(rs.getString("password"));
+      user.setPassword(rs.getString("password"));
       user.setRole(rs.getString("role"));
       return user;
     } catch (SQLException e) {
@@ -60,7 +66,7 @@ public class UserRepository {
   }
 
   public User create(User newUser) {
-    String sql = "INSERT INTO user(id, email, nick, password, role)" + " VALUES(?,?,?,?,?)";
+    String sql = "INSERT INTO user(idUser, email, nick, password, role)" + " VALUES(?,?,?,?,?)";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, newUser.getIdUser());
       preparedStatement.setString(2, newUser.getEmail());
@@ -77,7 +83,7 @@ public class UserRepository {
   }
 
   public User update(User updatedUser) {
-    String sql = "UPDATE spell SET email = ?, nick = ?, password = ?, role = ? WHERE" + " id = ?";
+    String sql = "UPDATE spell SET email = ?, nick = ?, password = ?, role = ? WHERE" + " idUser = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setString(1, updatedUser.getEmail());
       preparedStatement.setString(2, updatedUser.getNick());
@@ -93,7 +99,7 @@ public class UserRepository {
   }
 
   public User delete(Integer userToDelete) {
-    String sql = "DELETE FROM user WHERE id = ?";
+    String sql = "DELETE FROM user WHERE idUser = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       User deletedUser = get(userToDelete);
       preparedStatement.setInt(1, userToDelete);
@@ -106,14 +112,18 @@ public class UserRepository {
   }
 
   public List<User> getAll() {
-    String sql = "SELECT id, email, nick, password, role FROM users";
+    String sql = "SELECT idUser, email, nick, password, role FROM user";
     try (Statement statement = this.databaseConnection.createStatement();
         ResultSet rs = statement.executeQuery(sql); ) {
+
+      if (rs.isClosed()) {
+        throw new RuntimeException("No data returned");
+      }
 
       ArrayList<User> userList = new ArrayList<>();
       while (rs.next()) {
         User user = new User();
-        user.setIdUser(rs.getInt("id"));
+        user.setIdUser(rs.getInt("idUser"));
         user.setEmail(rs.getString("email"));
         user.setNick(rs.getString("nick"));
         user.setPassword(rs.getString("password"));
