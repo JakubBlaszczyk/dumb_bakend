@@ -20,7 +20,7 @@ public class PotionRepository {
   }
 
   public Potion get(Integer id) {
-    String sql = "SELECT id, name, effect, location FROM potions WHERE id = ?";
+    String sql = "SELECT id, name, effect, location FROM potion WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, id);
       ResultSet rs = preparedStatement.executeQuery();
@@ -44,7 +44,7 @@ public class PotionRepository {
   }
 
   public Potion create(Potion newPotion) {
-    String sql = "INSERT INTO potions(id, name, effect, location) VALUES(?,?,?,?)";
+    String sql = "INSERT INTO potion(id, name, effect, location) VALUES(?,?,?,?)";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setInt(1, newPotion.getIdPotion());
       preparedStatement.setString(2, newPotion.getName());
@@ -59,7 +59,7 @@ public class PotionRepository {
   }
 
   public Potion update(Potion updatedPotion) {
-    String sql = "UPDATE potions SET name = ?, effect = ?, location = ? WHERE id = ?";
+    String sql = "UPDATE potion SET name = ?, effect = ?, location = ? WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       preparedStatement.setString(1, updatedPotion.getName());
       preparedStatement.setString(2, updatedPotion.getEffect());
@@ -74,7 +74,7 @@ public class PotionRepository {
   }
 
   public Potion delete(Integer potionToDelete) {
-    String sql = "DELETE FROM potions WHERE id = ?";
+    String sql = "DELETE FROM potion WHERE id = ?";
     try (PreparedStatement preparedStatement = this.databaseConnection.prepareStatement(sql)) {
       Potion deletedPotion = get(potionToDelete);
       preparedStatement.setInt(1, potionToDelete);
@@ -87,7 +87,7 @@ public class PotionRepository {
   }
 
   public List<Potion> getAll() {
-    String sql = "SELECT id, name, effect, location FROM potions";
+    String sql = "SELECT id, name, effect, location FROM potion";
     try (Statement statement = this.databaseConnection.createStatement();
         ResultSet rs = statement.executeQuery(sql); ) {
 
