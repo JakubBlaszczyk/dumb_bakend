@@ -34,8 +34,8 @@ import spark.Response;
 public class Main {
 
   private static boolean checkPrivsInternal(String reqRole, String jwtRole) {
-    log.info("reqRole:", reqRole);
-    log.info("jwtRole:", jwtRole);
+    log.info("reqRole: {}", reqRole);
+    log.info("jwtRole: {}", jwtRole);
     if (reqRole.equalsIgnoreCase("admin") && jwtRole.equalsIgnoreCase("admin")) {
       return true;
     }
