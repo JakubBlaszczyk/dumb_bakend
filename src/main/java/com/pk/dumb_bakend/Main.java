@@ -27,11 +27,13 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.time.Instant;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
+import spark.Request;
+import spark.Response;
 
 @Slf4j
 public class Main {
 
-  private static boolean checkPrivs(String reqRole, String jwtRole) {
+  private static boolean checkPrivsInternal(String reqRole, String jwtRole) {
     if (reqRole.equals("admin") && jwtRole.equals("admin")) {
       return true;
     }
@@ -43,6 +45,21 @@ public class Main {
       return true;
     }
     return false;
+  }
+  public static boolean checkPrivs(Algorithm algorithm, Request req, Response resp, String reqRole) {
+    try {
+      DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
+      if (!checkPrivsInternal(reqRole, jwt.getClaim("role").asString())) {
+        resp.status(403);
+        return false;
+      }
+    } catch (Exception e) {
+      log.error("Exception msg: " + e.getMessage());
+      e.printStackTrace();
+      resp.status(403);
+      return false;
+    }
+    return true;
   }
 
   public static void main(String[] args) {
@@ -77,16 +94,7 @@ public class Main {
     get(
         "/armor/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(armorRepository.get(Integer.parseInt(req.params(":id"))));
@@ -94,16 +102,7 @@ public class Main {
     get(
         "/armor/all",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(armorRepository.getAll());
@@ -111,16 +110,7 @@ public class Main {
     post(
         "/armor",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -129,16 +119,7 @@ public class Main {
     put(
         "/armor",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -147,16 +128,7 @@ public class Main {
     delete(
         "/armor/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(armorRepository.delete(Integer.parseInt(req.params(":id"))));
@@ -166,16 +138,7 @@ public class Main {
     get(
         "/melee/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(meleeRepository.get(Integer.parseInt(req.params(":id"))));
@@ -183,16 +146,7 @@ public class Main {
     get(
         "/melee/all",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(meleeRepository.getAll());
@@ -200,16 +154,7 @@ public class Main {
     post(
         "/melee",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -218,16 +163,7 @@ public class Main {
     put(
         "/melee",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -236,16 +172,7 @@ public class Main {
     delete(
         "/melee/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(meleeRepository.delete(Integer.parseInt(req.params(":id"))));
@@ -255,16 +182,7 @@ public class Main {
     get(
         "/potion/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(potionRepository.get(Integer.parseInt(req.params(":id"))));
@@ -272,16 +190,7 @@ public class Main {
     get(
         "/potion/all",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(potionRepository.getAll());
@@ -289,16 +198,7 @@ public class Main {
     post(
         "/potion",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -307,16 +207,7 @@ public class Main {
     put(
         "/potion",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -325,16 +216,7 @@ public class Main {
     delete(
         "/potion/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(potionRepository.delete(Integer.parseInt(req.params(":id"))));
@@ -344,16 +226,7 @@ public class Main {
     get(
         "/ranged/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(rangedRepository.get(Integer.parseInt(req.params(":id"))));
@@ -361,16 +234,7 @@ public class Main {
     get(
         "/ranged/all",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(rangedRepository.getAll());
@@ -378,16 +242,7 @@ public class Main {
     post(
         "/ranged",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -396,16 +251,7 @@ public class Main {
     put(
         "/ranged",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -414,16 +260,7 @@ public class Main {
     delete(
         "/ranged/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(rangedRepository.delete(Integer.parseInt(req.params(":id"))));
@@ -472,16 +309,8 @@ public class Main {
     get(
         "/spell/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(spellRepository.get(Integer.parseInt(req.params(":id"))));
@@ -489,16 +318,7 @@ public class Main {
     get(
         "/spell/all",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("user", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(spellRepository.getAll());
@@ -506,16 +326,7 @@ public class Main {
     post(
         "/spell",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -524,16 +335,7 @@ public class Main {
     put(
         "/spell",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -542,16 +344,7 @@ public class Main {
     delete(
         "/spell/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(spellRepository.delete(Integer.parseInt(req.params(":id"))));
@@ -561,16 +354,7 @@ public class Main {
     get(
         "/user/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(userRepository.get(Integer.parseInt(req.params(":id"))));
@@ -578,16 +362,7 @@ public class Main {
     get(
         "/user/all",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("mod", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(userRepository.getAll());
@@ -595,16 +370,7 @@ public class Main {
     post(
         "/user",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("admin", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "admin")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -613,16 +379,7 @@ public class Main {
     put(
         "/user",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("admin", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "admin")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(
@@ -631,16 +388,7 @@ public class Main {
     delete(
         "/user/:id",
         (req, resp) -> {
-          try {
-            DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
-            if (!checkPrivs("admin", jwt.getClaim("role").asString())) {
-              resp.status(403);
-              return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
-            }
-          } catch (Exception e) {
-            log.error("Exception msg: " + e.getMessage());
-            e.printStackTrace();
-            resp.status(403);
+          if (!checkPrivs(algorithm, req, resp, "admin")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
           return gsonBuilder.toJson(spellRepository.delete(Integer.parseInt(req.params(":id"))));
