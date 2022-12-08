@@ -34,14 +34,16 @@ import spark.Response;
 public class Main {
 
   private static boolean checkPrivsInternal(String reqRole, String jwtRole) {
-    if (reqRole.equals("admin") && jwtRole.equals("admin")) {
+    log.info("reqRole:", reqRole);
+    log.info("jwtRole:", jwtRole);
+    if (reqRole.equalsIgnoreCase("admin") && jwtRole.equalsIgnoreCase("admin")) {
       return true;
     }
-    if (reqRole.equals("mod") && (jwtRole.equals("admin") || jwtRole.equals("mod"))) {
+    if (reqRole.equalsIgnoreCase("mod") && (jwtRole.equalsIgnoreCase("admin") || jwtRole.equalsIgnoreCase("mod"))) {
       return true;
     }
-    if (reqRole.equals("user")
-        && (jwtRole.equals("admin") || jwtRole.equals("mod") || jwtRole.equals("user"))) {
+    if (reqRole.equalsIgnoreCase("user")
+        && (jwtRole.equalsIgnoreCase("admin") || jwtRole.equalsIgnoreCase("mod") || jwtRole.equalsIgnoreCase("user"))) {
       return true;
     }
     return false;
