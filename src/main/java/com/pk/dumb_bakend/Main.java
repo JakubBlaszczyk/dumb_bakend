@@ -46,6 +46,7 @@ public class Main {
     }
     return false;
   }
+
   public static boolean checkPrivs(Algorithm algorithm, Request req, Response resp, String reqRole) {
     try {
       DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
@@ -100,7 +101,7 @@ public class Main {
           return gsonBuilder.toJson(armorRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
-        "/armor/all",
+        "/armor",
         (req, resp) -> {
           if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
@@ -144,7 +145,7 @@ public class Main {
           return gsonBuilder.toJson(meleeRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
-        "/melee/all",
+        "/melee",
         (req, resp) -> {
           if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
@@ -188,7 +189,7 @@ public class Main {
           return gsonBuilder.toJson(potionRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
-        "/potion/all",
+        "/potion",
         (req, resp) -> {
           if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
@@ -232,7 +233,7 @@ public class Main {
           return gsonBuilder.toJson(rangedRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
-        "/ranged/all",
+        "/ranged",
         (req, resp) -> {
           if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
@@ -316,7 +317,7 @@ public class Main {
           return gsonBuilder.toJson(spellRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
-        "/spell/all",
+        "/spell",
         (req, resp) -> {
           if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
@@ -360,7 +361,7 @@ public class Main {
           return gsonBuilder.toJson(userRepository.get(Integer.parseInt(req.params(":id"))));
         });
     get(
-        "/user/all",
+        "/user",
         (req, resp) -> {
           if (!checkPrivs(algorithm, req, resp, "mod")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
