@@ -184,10 +184,10 @@ public class JdbcService {
   private void createSpellDatabase(String userCsvPath) {
     final String SQL_DROP = "DROP TABLE IF EXISTS spell";
     final String SQL_CREATE =
-        "CREATE TABLE spell (idSpell int not null, name char(64), effect char(64), manaCost int,"
+        "CREATE TABLE spell (id int not null, name char(64), effect char(64), manaCost int,"
             + " requiredLevel int, location char(1024))";
     final String SQL_INSERT =
-        "INSERT INTO spell (idSpell, name, effect, manaCost, requiredLevel, location)"
+        "INSERT INTO spell (id, name, effect, manaCost, requiredLevel, location)"
             + " VALUES(?,?,?,?,?,?)";
     try (Statement statement = this.connection.createStatement()) {
       statement.executeUpdate(SQL_DROP);
