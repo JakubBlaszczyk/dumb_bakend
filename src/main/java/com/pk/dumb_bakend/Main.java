@@ -27,6 +27,7 @@ import at.favre.lib.crypto.bcrypt.BCrypt;
 import java.time.Instant;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
+import spark.Filter;
 import spark.Request;
 import spark.Response;
 
@@ -86,6 +87,11 @@ public class Main {
     RangedRepository rangedRepository = new RangedRepository(jdbcService.getConnection());
     SpellRepository spellRepository = new SpellRepository(jdbcService.getConnection());
     Algorithm algorithm = Algorithm.HMAC256("supertajemnysekret");
+
+    after((Filter) (request, response) -> {
+      response.header("Access-Control-Allow-Origin", "*");
+      response.header("Access-Control-Allow-Methods", "*");
+    });
 
     exception(
         Exception.class,
