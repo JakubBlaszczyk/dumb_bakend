@@ -2,6 +2,7 @@ package com.pk.dumb_bakend;
 
 import static spark.Spark.*;
 
+import at.favre.lib.crypto.bcrypt.BCrypt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTCreationException;
@@ -21,9 +22,6 @@ import com.pk.dumb_bakend.repository.PotionRepository;
 import com.pk.dumb_bakend.repository.RangedRepository;
 import com.pk.dumb_bakend.repository.SpellRepository;
 import com.pk.dumb_bakend.repository.UserRepository;
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
-
 import java.time.Instant;
 import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
@@ -40,17 +38,21 @@ public class Main {
     if (reqRole.equalsIgnoreCase("admin") && jwtRole.equalsIgnoreCase("admin")) {
       return true;
     }
-    if (reqRole.equalsIgnoreCase("mod") && (jwtRole.equalsIgnoreCase("admin") || jwtRole.equalsIgnoreCase("mod"))) {
+    if (reqRole.equalsIgnoreCase("mod")
+        && (jwtRole.equalsIgnoreCase("admin") || jwtRole.equalsIgnoreCase("mod"))) {
       return true;
     }
     if (reqRole.equalsIgnoreCase("user")
-        && (jwtRole.equalsIgnoreCase("admin") || jwtRole.equalsIgnoreCase("mod") || jwtRole.equalsIgnoreCase("user"))) {
+        && (jwtRole.equalsIgnoreCase("admin")
+            || jwtRole.equalsIgnoreCase("mod")
+            || jwtRole.equalsIgnoreCase("user"))) {
       return true;
     }
     return false;
   }
 
-  public static boolean checkPrivs(Algorithm algorithm, Request req, Response resp, String reqRole) {
+  public static boolean checkPrivs(
+      Algorithm algorithm, Request req, Response resp, String reqRole) {
     try {
       DecodedJWT jwt = JWT.require(algorithm).build().verify(req.headers("jwt"));
       if (!checkPrivsInternal(reqRole, jwt.getClaim("role").asString())) {
@@ -88,10 +90,13 @@ public class Main {
     SpellRepository spellRepository = new SpellRepository(jdbcService.getConnection());
     Algorithm algorithm = Algorithm.HMAC256("supertajemnysekret");
 
-    after((Filter) (request, response) -> {
-      response.header("Access-Control-Allow-Origin", "*");
-      response.header("Access-Control-Allow-Methods", "*");
-    });
+    after(
+        (Filter)
+            (request, response) -> {
+              response.header("Access-Control-Allow-Origin", "*");
+              response.header("Access-Control-Allow-Methods", "*");
+              response.header("Access-Control-Allow-Headers", "*");
+            });
 
     exception(
         Exception.class,
@@ -289,7 +294,8 @@ public class Main {
             log.error("LD_Email:" + loginData.getEmail());
             log.error("LD_Pass:" + loginData.getPassword());
 
-            BCrypt.Result res = BCrypt.verifyer().verify(loginData.getPassword().toCharArray(), user.getPassword());
+            BCrypt.Result res =
+                BCrypt.verifyer().verify(loginData.getPassword().toCharArray(), user.getPassword());
 
             if (!res.verified) {
               return gsonBuilder.toJson(new Err("Invalid credentials"), Err.class);
@@ -308,7 +314,8 @@ public class Main {
         "/register",
         (req, resp) -> {
           User user = gsonBuilder.fromJson(req.body(), User.class);
-          user.setPassword(BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray()));
+          user.setPassword(
+              BCrypt.withDefaults().hashToString(12, user.getPassword().toCharArray()));
           user.setRole("User");
           userRepository.create(user);
           return gsonBuilder.toJson(user, User.class);
@@ -318,7 +325,6 @@ public class Main {
     get(
         "/spell/:id",
         (req, resp) -> {
-          
           if (!checkPrivs(algorithm, req, resp, "user")) {
             return gsonBuilder.toJson(new Err("Invalid priv"), Err.class);
           }
